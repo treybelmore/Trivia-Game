@@ -1,34 +1,76 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Trivia Game</title>
-	 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
-<body>
-	<div>
-		<h1>I am trivia, hear me roar</h1>
-		<div>
-			<div id="quiz-area">
-				<button id="start">Start</button>
+<html lang="en">
 
-				<span id= "counter-number"></span>
-				<div id="question-1"></div>
-				<div id="answer-1"></div>
-				<br>
-				<div id="question-2"></div>
-				<div id="answer-2"></div>
-				<br>
-				<div id="question-3"></div>
-				<div id="answer-3"></div>
-				<br>
-				<div id="question-4"></div>
-				<div id="answer-4"></div>
-				<br>
-				<div id="question-5"></div>
-				<div id="answer-5"></div>
-			</div>
-		</div>
-	</div>
-	<script src="assets/javascript/app.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+ 
+    <title>Trivia</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron" style="background-color: blue; color: white; margin: 0px, 50px, 20px">
+        <div class=row>
+            <div class=col-lg-12>
+                <h1 class=text-center>Dallas Sports Trivia!</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="start">
+                <button type="button" style="margin-bottom: 10px">Start Game</button>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title question">
+                        <h4 style="color: white; background-color: #20315A">Lets Begin!</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-body" style="border: 2px solid black; padding: 1px 15px;">
+                <div class="guess button1 btn" value = "a1"><span id="choice1"></span></div>
+                <div class="guess button2 btn" value = "a2"><span id="choice2"></span></div>
+                <div class="guess button3 btn" value = "a3"><span id="choice3"></span></div>
+                <div class="guess button4 btn" value = "a4"><span id="choice4"></span></div>
+                <div class="correct"></div>
+            </div>      
+
+            <div class="timer"> 00:00
+            </div>
+
+            <div class="answer"> answer
+            </div>
+
+            <div class="skip">
+                <button type="button">Skip Question!</button>
+            </div>  
+
+            <div class="questionnumber"> 
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin: 15px">
+            <div class="col-lg-12">
+                <div class= "final-screen"></div>
+            </div>
+        </div>
+    </div>
+        
+  <script src="assets/javascript/app.js"></script>
+</div>
 </body>
 </html>

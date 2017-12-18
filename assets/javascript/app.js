@@ -1,112 +1,127 @@
-console.log('Hello from app.js')
-
-// questions
-var panel = $("#quiz-area")
+var intervalId;
+var countdownId;
+var correct = 0;
+var wrong = 0;
+var skipped = 0;
+var timer = 15;
+var count = 0;
+var correctanswer = "";
 
 var questions = [
-	{
-		question: "Who's the only quarterback that has not started for the Dallas Cowboys?",
-		answers: ["Tony Romo ", "Quincy Carter ", "Matt Cassell ", "Matt Schaub "],
-		correctAnswer: "Matt Schaub"
-	}, {
-		question: "Who is the all time leader for points in the Mavericks?",
-		answers: ["Jason Kidd ", "Michael Finley ", "Dirk Nowitzki ", "Steve Nash"],
-		correctAnswer: "Dirk Nowitzki"
-	},
-	{
-		question: "How many Super Bowl wins do the Dallas Cowboys have?",
-		answers: ["5 ", "4 ", "6 ", "3"],
-		correctAnswer: "5"
-	},
-	{
-		question: "What year did the Dallas Stars win their only Stanley Cup?",
-		answers: ["2000 ", "1999 ", "1988 ", "1969"],
-		correctAnswer: "1999"
-	},
-	{
-		question: "How many games did the Mavericks defeat the Heat in for the 2011 NBA Championship title?",
-		answers: ["7 ", "5 ", "6 ", "4 "],
-		correctAnswer: "6"
-	}
+             {  q: "Following a loss in the NBA finals to the Miami Heat in the 05-06 NBA season the Mavericks set a franchise record in 06-07 with how many wins?", 
+             	a1: "60", 
+             	a2: "62", 
+             	a3: "58", 
+             	a4: "67", 
+             	correct: "a4"},
+             {	q: "Which NFL player is NOT in the Cowboys ring of honor?", 
+             	a1: "Jason Witten",
+             	a2: "Darren Woodson", 
+             	a3: "Mel Renfro", 
+             	a4: "Bob Lilly", 
+             	correct: "a1"},
+             {	q: "Who scored the final goal in overtime for the Dallas Stars in route to their 1999 Stanley Cup victory?", 
+             	a1: "Mike Modano",
+             	a2: "Joe Nieuwendyk", 
+             	a3: "Brett Hull", 
+             	a4: "Mike Keane", 
+             	correct: "a3"},
+             {	q: "In the 2011 World Series the Texas Rangers lost to the St. Louis Cardinals in game 6. Who missed a deep center field catch in the 9th inning that ultimately led to the Cardinals victory?", 
+             	a1: "Michael Young",
+             	a2: "Josh Hamilton", 
+             	a3: "Nelson Cruz", 
+             	a4: "Craig Gentry", 
+             	correct: "a3"},
+             {	q: "How many Super Bowl wins do the Dallas Cowboys have and when was their last win?", 
+             	a1: "6, 1994",
+             	a2: "5, 1995", 
+             	a3: "4, 1995", 
+             	a4: "5, 1996", 
+             	correct: "a4"},
+             ];
 
-]
-// var check = questions.forEach(function(question) {
-// 	console.log("I am question", question.answers)
-// 	for (var i = 0; i < question.answers.length; i++) {
-// 		question.answers[i]
-// 		panel.append(`<input type='radio' name=question-${i} value='${question.answers[i]}'`)
-// 	}
+$(".start").on("click" , function(event){
+    event.preventDefault();
+question();
+countdown();
+resetTimer();
+updateTimer();
+})	
 
-// 	console.log("I am answer", question.correctAnswer)
-// })
+$(".skip").on("click", function(event){
+	event.preventDefault();
+count++;
+skipped++;
+final();
+question();
+countdown();
+updateTimer();	
+})
 
-// console.log(check)
+$(".guess").on("click" , function(event){
+        response = $(this).attr("value");
+        
+    if (response == questions[count].correct) {
+            correct++;
+        	alert("That is correct!");
+        }
+    else {
+    	wrong++;
+    	alert("That is wrong!")
+    	}
+        timerSet = 20;
+    count++;
+final();
+question();
+})
 
-// var time;
+function countdown(){
+    countdownId = setInterval(timeUp, 1000);
+  	intervalId = setInterval(updateTimer, 1000);
+}
 
-$("#question-1").append(questions[0].question);
-$("#question-2").append(questions[1].question);
-$("#question-3").append(questions[2].question);
-$("#question-4").append(questions[3].question);
-$("#question-5").append(questions[4].question);
+function resetTimer(){
+	countdownId = setInterval(timeUp, 1000);
+	timer= 20;
+}
 
-for (var i = 0; i < questions.length; i++) {
-		$
+function timeUp(){
+	$(".answer").html(questions[4]);
+		clearInterval(intervalId);
+}
+
+function updateTimer(){
+	timer --;
+	if (timer < 0){
+		skipped++;	
+		count++;
+		final();
+		question();
+				}
+	else {
+	 $(".timer").html(timer);
 	}
 }
 
-// var game = {
-
-// 	correct: 0,
-// 	incorrect: 0,
-// 	counter: 120,
-
-// 	countdown: function() {
-// 		game.counter--;
-// 		$("#counter-number").html(game.counter);
-// 		if (game.counter === 0 ) {
-// 			console.log("GAME OVER MAN")
-// 			game.done()
-// 		}
-// 	}
+function question(){
+	console.log(count);
+    $(".question").html(questions[count].q);
+    $(".button1").html(questions[count].a1);
+    $(".button2").html(questions[count].a2);
+    $(".button3").html(questions[count].a3);
+    $(".button4").html(questions[count].a4);
+    $(".questionnumber").html("Question Number " + (count+1) + " of 5!")  
+	timeUp();
+	resetTimer();
+	countdown();
 	
+}
 
-	// start: function() {
-	// 	// start countdown
-
-	// 	// remove the start button
-
-	// 	// create a nested forloop taht appends the questions to the game div
-		
-	// 	// append the done button.
-
-	// 	// call done when button is clicked, or timer runs out.
-	// }
-
-
-	
-
-// 	done: function() {
-// 		// go through which answer you checked for each question,
-
-// 		// then compare the answer to the correct answer
-
-// 		// return this.result()
-// 	},
-
-// 	result: function() {
-// 		// clear the timer
-
-// 		// append html with global variables "correct answers and incorrect answers"
-
-// 		// reappend a start button
-// 	}
-
-// }
-
-
-// // timer that will hold the set interval
-
-// // game object
-
-// // create event listener on "start button" that starts the game
+function final(){
+	if (count == 5){
+		count =0;
+    $(".final-screen").html("<p>Correct Answers: " + correct + "</p>");
+    $(".final-screen").append("<p>Incorrect Answers: " + wrong + "</p>"); 
+    $(".final-screen").append("<p>Skipped Answers: " + skipped + "</p>");   
+    }
+}
